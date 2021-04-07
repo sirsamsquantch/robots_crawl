@@ -34,6 +34,17 @@ for agent in userAgents:
 				# print(url+' : '+agent)
 				success = url+' : '+agent
 				found.append(success)
+				# print(r.content)
+				flagPattern = 'Central-InfoSec{(.*\w)}'
+				if re.search(flagPattern, str(r.content)):
+					match = re.search(flagPattern, str(r.content))
+					foundFlag = match.group(0)
+					print('************************')
+					print('Found a flag on '+url)
+					print('UserAgent: '+agent)
+					print(foundFlag)
+					print('************************')
+
 				# pass
 			# elif r.status_code == 500:
 				# print(r.status_code)
