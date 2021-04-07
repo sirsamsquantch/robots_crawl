@@ -7,11 +7,10 @@ f = open('robots.txt', 'r')
 
 userAgents = ('testing', 'stage', 'dev', 'prod')
 urls = []
-found = []
 
 content = f.readlines()
 pattern = '^.* (.*)$'
-
+found = []
 
 for line in content:
 	if re.search(pattern,line):
@@ -32,7 +31,21 @@ for agent in userAgents:
 		try:
 			r = requests.get(url, headers=headers)
 			if r.status_code == 200:
-				print(url+' : '+agent)
-			# print(type(r.status_code))
-		except:
-			pass
+				# print(url+' : '+agent)
+				success = url+' : '+agent
+				found.append(success)
+				# pass
+			# elif r.status_code == 500:
+				# print(r.status_code)
+				# print(url+' : '+agent)
+				# pass
+			# elif r.status_code != 200:
+				# print(url+' : '+agent)
+
+			# print(r.status_code)
+		except Exception as error:
+			print(error)
+
+found.sort()
+for x in found:
+	print(x)
